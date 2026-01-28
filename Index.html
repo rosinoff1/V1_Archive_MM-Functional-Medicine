@@ -1,1 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MM Functional Medicine | Holistic Health & Wellness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #4a6741;
+            --primary-light: #6b8f5e;
+            --primary-dark: #2d4228;
+            --accent: #c9a959;
+            --cream: #faf8f5;
+            --warm-white: #fffef9;
+            --text-dark: #2c2c2c;
+            --text-light: #5a5a5a;
+            --text-muted: #8a8a8a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: var(--warm-white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            padding: 0.8rem 5%;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #e8efe5 0%, #f5f3ee 50%, #faf8f5 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 70%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(74, 103, 65, 0.08) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(201, 169, 89, 0.1) 0%, transparent 60%);
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, 30px) rotate(5deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--text-dark);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-dark);
+            color: white;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+            margin: 0 auto;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--cream);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--accent);
+            z-index: 0;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            filter: grayscale(20%);
+        }
+
+        .about-image-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image-placeholder span {
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-style: italic;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text h2 span {
+            color: var(--primary);
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .credentials {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .credential {
+            text-align: center;
+        }
+
+        .credential-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .credential-label {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .philosophy .section-label {
+            color: var(--accent);
+        }
+
+        .philosophy .section-title {
+            color: white;
+        }
+
+        .philosophy-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-style: italic;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--warm-white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8efe5 100%);
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Is This For You Section */
+        .for-you {
+            background: linear-gradient(to right, var(--cream) 50%, var(--primary) 50%);
+        }
+
+        .for-you-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .for-you-left {
+            padding-right: 4rem;
+        }
+
+        .for-you-left h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .for-you-list {
+            list-style: none;
+        }
+
+        .for-you-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .for-you-list li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .for-you-right {
+            color: white;
+            padding-left: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .for-you-right h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .for-you-right p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .for-you-right .btn {
+            background: white;
+            color: var(--primary);
+            border-color: white;
+            align-self: flex-start;
+        }
+
+        .for-you-right .btn:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* Approach Section */
+        .approach {
+            background: var(--warm-white);
+        }
+
+        .approach-steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .approach-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.5;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .approach-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .approach-step p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--cream);
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial {
+            padding: 2rem;
+        }
+
+        .testimonial-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        .contact .section-label {
+            color: var(--accent);
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent);
+            fill: none;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form .btn {
+            background: var(--accent);
+            color: var(--primary-dark);
+            border-color: var(--accent);
+            align-self: flex-start;
+        }
+
+        .contact-form .btn:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a2617;
+            color: rgba(255,255,255,0.6);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                order: -1;
+            }
+
+            .for-you {
+                background: var(--cream);
+            }
+
+            .for-you-content {
+                grid-template-columns: 1fr;
+            }
+
+            .for-you-left {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+
+            .for-you-right {
+                background: var(--primary);
+                padding: 3rem;
+                margin: 0 -5%;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .hero-content .btn {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 250px;
+            }
+
+            .credentials {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">MM Functional Medicine</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">Functional & Integrative Medicine</p>
+            <h1>Discover Your Path to <span>Optimal Health</span></h1>
+            <p>A personalized, root-cause approach to wellness that treats the whole person, not just the symptoms. Experience healthcare that truly listens.</p>
+            <div>
+                <a href="#contact" class="btn btn-primary">Book Consultation</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-image">
+                <div class="about-image-placeholder">
+                    <span>MM</span>
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>Meet Your <span>Practitioner</span></h2>
+                <p>As a Board-Certified Family Nurse Practitioner with extensive experience in functional and integrative medicine, I bring a unique perspective shaped by years in emergency and critical care settings at renowned hospitals across the country.</p>
+                <p>My background in western medicine created a strong foundation; however, I recognized that the conventional model has limitations when it comes to optimizing health, investigating difficult-to-diagnose symptoms, and preventing chronic conditions.</p>
+                <p>I was discouraged by the "band-aid" approach and wanted to provide more impactful, personalized care. That's why I now focus on finding the root cause of your health concerns and creating customized treatment plans that truly make a difference.</p>
+                <div class="credentials">
+                    <div class="credential">
+                        <div class="credential-number">11+</div>
+                        <div class="credential-label">Years Experience</div>
+                    </div>
+                    <div class="credential">
+                        <div class="credential-number">500+</div>
+                        <div class="credential-label">Patients Helped</div>
+                    </div>
+                    <div class="credential">
+                        <div class="credential-number">90</div>
+                        <div class="credential-label">Min First Visit</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="section-header">
+            <p class="section-label">Our Philosophy</p>
+            <h2 class="section-title">A Different Approach to Medicine</h2>
+        </div>
+        <p class="philosophy-quote">"True healing begins when we look beyond symptoms and understand the whole person — their history, lifestyle, environment, and unique biochemistry. This is medicine that listens, investigates, and empowers."</p>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <p class="section-label">What We Offer</p>
+            <h2 class="section-title">Comprehensive Services</h2>
+            <p class="section-subtitle">Personalized care designed to address the root cause of your health concerns</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Comprehensive Health Assessment</h3>
+                <p>In-depth evaluation including detailed health history, lifestyle analysis, and advanced diagnostic testing to understand your unique health picture.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>Hormone Optimization</h3>
+                <p>Comprehensive hormone testing and personalized treatment plans to restore balance and vitality, addressing issues like fatigue, weight changes, and mood fluctuations.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <h3>Gut Health Restoration</h3>
+                <p>Advanced testing and treatment protocols to heal digestive issues, food sensitivities, and optimize your microbiome for whole-body health.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                </div>
+                <h3>Nutritional Counseling</h3>
+                <p>Personalized nutrition plans based on your unique biochemistry, health goals, and lifestyle to fuel optimal wellness and disease prevention.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M4.93 19.07A10 10 0 1 1 19.07 4.93M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83"/></svg>
+                </div>
+                <h3>Thyroid & Adrenal Support</h3>
+                <p>Comprehensive evaluation and treatment of thyroid dysfunction and adrenal fatigue using both conventional and integrative approaches.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Autoimmune Management</h3>
+                <p>Root-cause investigation and holistic management of autoimmune conditions, focusing on reducing inflammation and supporting immune balance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Is This For You Section -->
+    <section class="for-you">
+        <div class="for-you-content">
+            <div class="for-you-left">
+                <h2>Is This For You?</h2>
+                <ul class="for-you-list">
+                    <li>You want answers to vague symptoms like low energy, headaches, brain fog, acne, moodiness, or irregular cycles</li>
+                    <li>You've been told your labs are "normal" but you still don't feel like yourself</li>
+                    <li>You want natural tools to improve your current health condition</li>
+                    <li>You're looking for unhurried visits where you feel genuinely heard</li>
+                    <li>You want thorough interpretation of your labs, not just a quick glance</li>
+                    <li>You need a customized, comprehensive plan tailored to your unique needs</li>
+                    <li>You're overwhelmed by health information on social media and need guidance</li>
+                    <li>You're ready to invest in your long-term health and vitality</li>
+                </ul>
+            </div>
+            <div class="for-you-right">
+                <h3>Ready to Feel Like Yourself Again?</h3>
+                <p>Your initial 90-120 minute consultation gives us the time to truly understand your health story and create a personalized plan for your wellness journey.</p>
+                <a href="#contact" class="btn">Schedule Your Visit</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Approach Section -->
+    <section class="approach" id="approach">
+        <div class="section-header">
+            <p class="section-label">The Process</p>
+            <h2 class="section-title">Our Approach</h2>
+            <p class="section-subtitle">A methodical, personalized path to discovering and addressing the root cause of your health concerns</p>
+        </div>
+        <div class="approach-steps">
+            <div class="approach-step">
+                <div class="step-number">01</div>
+                <h3>Discovery</h3>
+                <p>Comprehensive intake exploring your complete health history, lifestyle, environment, and goals during our extended initial consultation.</p>
+            </div>
+            <div class="approach-step">
+                <div class="step-number">02</div>
+                <h3>Investigate</h3>
+                <p>Advanced functional testing to uncover root causes, including comprehensive blood panels, hormone testing, gut analysis, and more.</p>
+            </div>
+            <div class="approach-step">
+                <div class="step-number">03</div>
+                <h3>Personalize</h3>
+                <p>Development of your customized treatment plan integrating nutrition, supplements, lifestyle modifications, and when appropriate, medication.</p>
+            </div>
+            <div class="approach-step">
+                <div class="step-number">04</div>
+                <h3>Transform</h3>
+                <p>Ongoing support and plan optimization as we work together toward your health goals, adjusting as your body heals and changes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <p class="section-label">Patient Stories</p>
+            <h2 class="section-title">What Patients Are Saying</h2>
+        </div>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <p class="testimonial-text">"For the first time in years, I feel truly heard by a healthcare provider. The comprehensive approach uncovered issues that had been missed for years. I finally have energy again and feel like myself."</p>
+                <p class="testimonial-author">— Sarah M., Patient</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <p class="section-label">Get Started</p>
+            <h2 class="section-title">Begin Your Wellness Journey</h2>
+            <p class="section-subtitle">Take the first step toward optimal health with a personalized consultation</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>(555) 123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>info@mmfunctionalmed.com</span>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>New York City Area</span>
+                </div>
+                <div class="contact-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span>Telehealth Available</span>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Tell Us About Your Health Goals</label>
+                    <textarea id="message" placeholder="What brings you to functional medicine?"></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">MM Functional Medicine</div>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#approach">Approach</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2026 MM Functional Medicine. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Make hero visible immediately
+        document.querySelector('.hero').style.opacity = '1';
+        document.querySelector('.hero').style.transform = 'translateY(0)';
+    </script>
+</body>
+</html>
